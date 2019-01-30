@@ -1,0 +1,63 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Aula 05 - Composição com Componentes</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <h1>{{message}}</h1>
+        <ol>
+            <todo-item></todo-item>
+        </ol>
+
+        <h1>{{message}}</h1>
+        <ol>
+            <todo-item-props 
+                v-for="item in groceryList" 
+                v-bind:todo="item" 
+                v-bind:key="item.id">
+            </todo-item-props>
+        </ol>
+    </div>
+
+    <script>
+        /**
+        * criando um componente no Vue
+        */
+        Vue.component('todo-item', {
+            template: '<li>Isso é um item</li>'
+        });
+
+        /**
+        * criando um componente com props
+        */
+        Vue.component('todo-item-props', {
+            props: ['todo'],
+            template: '<li>{{ todo.text }}</li>'
+        })
+
+        var app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Composição com Componentes',
+                groceryList: [
+                    { id: 0, text: 'Vegetais' },
+                    { id: 1, text: 'Queijo' },
+                    { id: 2, text: 'Alface' },
+                    { id: 3, text: 'Rucula' },
+                    { id: 3, text: 'Beterraba' },
+                ],
+            },
+        })
+    </script>
+
+</body>
+
+</html>
