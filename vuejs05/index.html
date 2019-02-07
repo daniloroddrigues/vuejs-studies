@@ -12,18 +12,17 @@
 
 <body>
     <div id="app">
-        <h1>{{message}}</h1>
+        <h1>{{ titleComponentSingle }}</h1>
         <ol>
             <todo-item></todo-item>
         </ol>
 
-        <h1>{{message}}</h1>
+        <h1>{{ titleComponentFor }}</h1>
         <ol>
-            <todo-item-props 
-                v-for="item in groceryList" 
-                v-bind:todo="item" 
-                v-bind:key="item.id">
-            </todo-item-props>
+            <todo-item-props
+                v-for="item in groceryList"
+                v-bind:todo="item"
+                v-bind:key="item.id" />
         </ol>
     </div>
 
@@ -46,7 +45,8 @@
         var app = new Vue({
             el: '#app',
             data: {
-                message: 'Composição com Componentes',
+                titleComponentSingle: 'Componente Simple',
+                titleComponentFor: 'Componente de Laço',
                 groceryList: [
                     { id: 0, text: 'Vegetais' },
                     { id: 1, text: 'Queijo' },
