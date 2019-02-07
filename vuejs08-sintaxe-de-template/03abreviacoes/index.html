@@ -1,0 +1,50 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sintaxe de Template - Abreviações</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      
+      <h2># Abreviação para v-bind</h2>
+
+      <!-- sintaxe completa -->
+      <a v-bind:href="url">Url V-BIND</a>
+      <br>
+      <!-- abreviação-->
+      <a :href="url">URL</a>
+
+      <h2># Abreviação para v-on</h2>
+      <!-- sintaxe complete -->
+      <a v-on:click="doSomenthing">Do Something</a>
+      <br>
+      <!-- abreviação -->
+      <a @click="doSomenthing">Abreviação</a>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Abreviações",
+        },
+        methods: {
+            url: function() {
+                console.log('URL function');
+            },
+            doSomenthing: function(){
+                console.log('Clicou');
+            }
+        },
+      });
+    </script>
+  </body>
+</html>

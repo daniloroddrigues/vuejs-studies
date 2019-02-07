@@ -1,0 +1,56 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sintaxe de Template - Diretivas</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <p v-if="seen">Agora você me viu</p>
+
+      <h1>#{{ titleParamentros }}</h1>
+      <a v-bind:href="url">Url Bind</a>
+      <br />
+      <a v-on:click="doSomething">Do Something</a>
+
+      <h1>#{{ titleModificadores }}</h1>
+      <form v-on:submit.prevent="onSubmit">
+          <input placeholder="Nome: " name="name" />
+          <br />
+          <button type="submit">Enviar</button>
+      </form>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Diretivas",
+          seen: true,
+          titleParamentros: "Parâmentros",
+          count: 0,
+          titleModificadores: "Modificadores",
+        },
+        methods: {
+          url: function() {
+            return "http://google.com";
+          },
+          doSomething: function() {
+              console.log('Clicou');
+              return this.count + 1;
+          },
+          onSubmit: function() {
+              console.log('Enviado com sucesso.')
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

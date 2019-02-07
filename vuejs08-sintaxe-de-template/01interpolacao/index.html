@@ -1,0 +1,76 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Sintaxe de Template - Interpolação</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>{{ texto }}</h1>
+      <span> Mensagem: {{ msg }}</span>
+      <br />
+      <span v-once>Esta mensagem nunca vai ser atualizada {{ msg }}</span>
+
+      <h1>{{ htmlTexto }}</h1>
+      <p>Interpolação textual: {{ rawHtml }}</p>
+      <p>Diretiva v-html: <span v-html="rawHtml"></span></p>
+
+      <h1>{{ atributosTexto }}</h1>
+      <div v-bind:id="dinamicId"></div>
+      <button v-bind:disabled="isButtonDisabled">Desabilitado</button>
+      <button type="submit" disabled>Test botão html sem bind</button>
+
+      <h1>{{ expressoesTexto }}</h1>
+      <p>{{ number + 1 }}</p>
+      <p>{{ ok ? "SIM" : "NÃO" }}</p>
+      <p>
+        {{
+          msg
+            .split("")
+            .reverse()
+            .join("")
+        }}
+      </p>
+      <h2>Expressões que não funciona</h2>
+      <pre>{\{ var a = 1 }\}</pre>
+      <pre>{\{ if(ok) { return msg } }\}</pre>
+      <!-- <p>{{ var a = 1 }}</p> -->
+      <!-- <p>{{ if(ok) { return msg } }}</p> -->
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          texto: "Texto",
+          msg: "Hey Interpolação",
+          htmlTexto: "HTML",
+          rawHtml: "<span style='color: red;'>Sou vermelho</span>",
+          atributosTexto: "Atributos",
+          expressoesTexto: "Expressões JavaScript",
+          number: 0,
+          ok: true
+        },
+        methods: {
+          dinamicId() {
+            console.log("Id Dinamico");
+          },
+          isButtonDisabled() {
+            console.log("Botão desabilidado");
+          }
+        },
+        created: function() {
+          console.log("Criado");
+          console.log("texto é: " + this.texto);
+          console.log("msg é: " + this.msg);
+        }
+      });
+    </script>
+  </body>
+</html>
