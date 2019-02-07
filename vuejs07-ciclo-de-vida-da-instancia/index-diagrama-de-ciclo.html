@@ -1,0 +1,101 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Ciclo de Vida da Instância</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->    
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        {{ message }}
+    </div>
+
+    <script>
+        var app = new Vue({
+            el: "#app",
+            data: {
+                a: 1,
+                message: "Diagrama de Ciclo"
+            },
+
+            beforeCreate() {
+                console.log('Antes de Criar');
+            },
+
+            observerData() {
+                console.log('Observer Data');
+            },
+
+            eventsOfInicialization() {
+                console.log('Eventos de Observação');
+            },
+
+            created() {
+                console.log('Criado');
+            },
+
+            ifAOptionEl() {
+                console.log('Tem a opção el?')
+                let yes = true;
+                if(yes) {
+                    ifTemplate();
+                } else {
+                    vmMount();
+                    ifTemplate();
+                }
+            },
+
+            ifTemplate() {
+                console.log('Tem a Opção Template?');
+                let yes = true;
+                if(yes) {
+                    console.log('Compilação de Template na função render.');
+                } else {
+                    console.log('Compilação el\'s outherHTML como template')
+                }
+            },
+
+            vmMount() {
+                console.log('Quando o vm.$mount(el) é chamado');
+            },
+
+            beforeMount() {
+              console.log('Antes de Montar');  
+            },
+
+            createVmEl() {
+                console.log('Cria vm.$el e substitui "el" com ele');
+            },
+
+            mounted() {
+                console.log('Montado')
+            },
+
+            beforeUpdate() {
+                console.log('Antes de Atualizar');
+            },
+
+            updated() {
+                console.log('Atualizado');
+            },
+
+            beforeDestroy() {
+                console.log('Antes de Destruir');
+            },
+
+            destroyed() {
+                console.log('Destruido');
+            },
+
+        });
+    </script>
+
+</body>
+
+</html>
