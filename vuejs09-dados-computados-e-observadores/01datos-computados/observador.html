@@ -1,0 +1,62 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Dados Computados e Observadores - Observadores</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <p>
+        Faça uma pergunta do tipo sim/não:
+        <input v-model="question">
+      </p>
+      <p>{{ answer }}</p>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Observadores",
+          question: '',
+          answer: 'Eu não posso responder até que você me faça uma pergunta',
+        },
+        watch: {
+          question: function(newQuestion, oldQuestion) {
+            this.answer = 'Esperando você parar de escrever...'
+            this.dobouncedGetAnswer()
+          }
+        },
+        created: function() {
+          this.dobouncedGetAnswer = _.debounce(this.getAnswer, 500)
+        },
+        methods: {
+          getAnswer: function() {
+            if(this.question.indexOf('?') === -1) {
+              this.answer = 'Perguntas geralmente tem interrogação ;-)'
+              return
+            }
+            this.answer = 'Pensando...'
+            var vm = this
+            axios.get('https://yesno.wtf/api')
+              .then(function(response) {
+                vm.answer = response.data.answer === 'yes' ? 'Sim.': response.data.answer == 'no' ? 'Não' : 'Talvez!'
+              })
+              .catch(function(error) {
+                vm.answer = 'Erro! Não pode executar a API' + error
+              })
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

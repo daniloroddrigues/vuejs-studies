@@ -1,0 +1,43 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Dados Computados e Observadores - Atribuição em Dados Computados</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <p>{{ firstName }}</p>
+      <p>{{ lastName }}</p>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Atribuição em Dados Computados",
+          firstName: 'Foo',
+          lastName: 'Bar',
+        },
+        computed: {
+          fullName: {
+            get: function() {
+              return this.firstName + ' ' + this.lastName
+            },
+            set: function(newValeu) {
+              var names = newValeu.split(' ')
+              this.firstName = names.shift()
+              this.lastName = names.pop()
+            }
+          }
+        },
+      });
+    </script>
+  </body>
+</html>
