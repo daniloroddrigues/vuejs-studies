@@ -1,0 +1,47 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Renderização de Listas - Determinando Mudanças em Arrays</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+
+      <ul>
+        <li>push() - coloca um item no final da lista</li>
+        <li>pop() - retira do array começando pelo última possição</li>
+        <li>shift() - retira do array começando pelo primeira possição</li>
+        <li>unshift() - coloca um item no começo da lista</li>
+        <li>splice() - adiciona/remove item da lista e retorna o item remvido</li>
+        <li>sort() - organiza a lista</li>
+        <li>reverse() - inverte a lista e retorna ela mesma</li>
+      </ul>
+      <ul id="list">
+        <li v-for="(item, index) in items" :key="index">
+          {{ index }}: {{ item.firstName }} - {{ item.lastName }} - {{ item.age }}
+        </li>
+      </ul>
+
+    </div>
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Métodos de mutação",
+          items: [
+            { firstName: "Danilo", lastName: "Rodrigues", age: 30 },
+            { firstName: "Solas", lastName: "Encript", age: 30 },
+            { firstName: "Ais", lastName: "Nozrs", age: 30 },
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>

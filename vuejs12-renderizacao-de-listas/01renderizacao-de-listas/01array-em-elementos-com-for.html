@@ -1,0 +1,47 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Renderização de Listas - Array em elementos v-for</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+
+      <ul id="example-1">
+        <li v-for="item in items">
+          {{ item.message }}
+        </li>
+      </ul>
+
+      <ul id="example-2">
+        <li v-for="(item, index) in items">
+          {{ index }} - {{ parentTitle }} - {{ item.message }}
+        </li>
+      </ul>
+
+      <ul id="example-3">
+        <li v-for="item of items">
+          {{ item.message }}
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Renderização de Listas",
+          parentTitle: "Acesso as propriedades do Pai.",
+          items: [{ message: "Algo" }, { message: "Outro" }]
+        }
+      });
+    </script>
+  </body>
+</html>
