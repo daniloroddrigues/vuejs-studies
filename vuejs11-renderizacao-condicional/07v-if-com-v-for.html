@@ -1,0 +1,43 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Renderização Condicional - Controlando Reutilização com Key</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>Pares</h1>
+      <div v-for="item in todos">
+        <div v-if="item.id % 2 === 0">{{ item.id }} - {{ item.name }}</div>
+      </div>
+
+      <h1>Impares</h1>
+      <div v-for="item in todos">
+        <div v-if="item.id % 2 !== 0">{{ item.id }} - {{ item.name }}</div>
+      </div>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          ok: false,
+          title: "v-if vs. v-show",
+          todos: [
+            { id: 0, name: "Honda" },
+            { id: 1, name: "Yamaha" },
+            { id: 2, name: "Ducati" },
+            { id: 3, name: "Kawasaki" },
+            { id: 4, name: "Harley Davidson" }
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>

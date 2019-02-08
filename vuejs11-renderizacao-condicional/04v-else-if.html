@@ -1,0 +1,50 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Renderização Condicional - v-else-if</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1 v-if="ok">#{{ title }}</h1>
+
+      <div v-if="type === 'A'">A</div>
+      <div v-else-if="type === 'B'">B</div>
+      <div v-else-if="type === 'C'">C</div>
+      <div v-else>Não é nem A, B ou C</div>
+
+      <button @click="changeType">Mudar os Valore</button>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Renderização Condicional - v-else-if",
+          ok: true,
+          type: "A"
+        },
+        methods: {
+          changeType: function() {
+            let type = Math.floor(Math.random() * 5)
+            if(type === 1) {
+              this.type = 'A'
+            } else if (type === 2) {
+              this.type = 'B'
+            } else if (type === 3) {
+              this.type = 'C'
+            } else {
+              this.type = 'Não é nem A, B ou C'
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
