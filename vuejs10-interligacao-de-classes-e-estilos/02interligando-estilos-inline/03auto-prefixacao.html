@@ -1,0 +1,32 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Interligações de Classe e Estilo - Auto Prefixação</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+
+    <div id="app">
+      <h1 v-bind:style="stylesObject">#{{ title }}</h1>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Auto Prefixação",
+          stylesObject: {
+            transform: 'rotate(5deg)',
+            cursor: 'pointer',
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

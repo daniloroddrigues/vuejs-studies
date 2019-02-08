@@ -1,0 +1,39 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Interligações de Classe e Estilo - Em Componentes</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      
+      <class-in-component class="baz boo" />
+      
+      <!-- não pode chamar dois componentes ao mesmo tempo? -->
+      <class-in-component v-bind:class="{ active: isActive }" />
+      
+    </div>
+
+    <script>
+
+      Vue.component('class-in-component', {
+        template:`<p class="foo bar">classe vão para o componente</p>`,
+      })
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Em Componentes",
+          isActive: true,
+        },
+      });
+    </script>
+  </body>
+</html>

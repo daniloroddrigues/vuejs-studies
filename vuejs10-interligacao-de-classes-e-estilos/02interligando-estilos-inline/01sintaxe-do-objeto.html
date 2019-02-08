@@ -1,0 +1,41 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Interligações de Classe e Estilo - Interligando Classes HTML</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <h2>#Sintaxe do Objeto</h2>
+      <div v-bind:style="{ color: activeColor, fontSize: fontSize + 'px' }" >v-bind:style</div>
+      <div v-bind:style="styleObject" >styleObject</div>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Sintaxe de Objeto",
+          fontSize: 20,
+          activeColor: 'red',
+          styleObject: {
+            color: 'red',
+            fontSize: '35px',
+            textDecoration: 'underline',
+            paddingTop: '20px',
+            paddingBottom: '20px',
+            textAlign: 'center',
+            fontFamaly: 'Open Sans',
+          }
+        },
+      });
+    </script>
+  </body>
+</html>

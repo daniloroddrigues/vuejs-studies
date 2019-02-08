@@ -1,0 +1,47 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Interligações de Classe e Estilo - Sintaxe de Array</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <div :class="[activeClass, errorClass]">Array de Classes</div>
+      <div :class="[isActive ? activeClass : '', errorClass]">
+        Condição tenária Array de Classes
+      </div>
+      <div :class="[ {active: isActive}, errorClass]">
+        Sintaxe bonita
+      </div>
+      <button @click="changeState">Class Active</button>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Sintaxe de Array",
+          isActive: true,
+          activeClass: "active",
+          errorClass: "text-danger"
+        },
+        methods: {
+          changeState: function() {
+            if (this.isActive === true) {
+              return (this.isActive = false);
+            } else {
+              return (this.isActive = true);
+            }
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
