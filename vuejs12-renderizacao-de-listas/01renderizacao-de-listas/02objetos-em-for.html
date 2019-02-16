@@ -30,6 +30,13 @@
           {{ index }}: {{ item.firstName }} - {{ item.lastName }} - {{ item.age }}
         </li>
       </ul>
+
+      <ul id="v-for-key">
+        <!-- index ou key = mesma coisa -->
+        <li v-for="item in items" :key="item.id">
+          {{ item.firstName }} - {{ item.lastName }} - {{ item.age }}
+        </li>
+      </ul>
     </div>
 
     <script>
