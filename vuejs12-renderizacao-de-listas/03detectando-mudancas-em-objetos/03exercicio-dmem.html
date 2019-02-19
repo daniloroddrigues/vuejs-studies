@@ -1,0 +1,83 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Detectando Mudanças em Objetos</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <table>
+        <tr v-bind:style="styleHead">
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th>Favorite Color</th>
+          <th>Click</th>
+        </tr>
+        <tr v-bind:style="styleBody">
+          <th>{{ userProfile.firstName }}</th>
+          <th>{{ userProfile.lastName }}</th>
+          <th>{{ userProfile.age }}</th>
+          <th>{{ userProfile.favoriteColor }}</th>
+          <th><button @click="addItems">Random Items</button></th>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Detectando Mudanças em Objetos 2",
+          userProfile: {
+            firstName: "Tio",
+            lastName: "Bill"
+          },
+          styleHead: {
+            textAlign: "left",
+            fontSize: "14px",
+            fontWeight: "bold"
+          },
+          styleBody: {
+            textAlign: "left",
+            fontSize: "12px",
+            fontWeight: "ligth"
+          }
+        },
+        methods: {
+          addItems: function() {
+            // Adicionando valores reativamente 
+            // depois que a instância Vue foi criada
+            app.userProfile = Object.assign({}, app.userProfile, {
+              age: this.randomAge(),
+              favoriteColor: this.randomColor()
+            });
+          },
+          randomAge: function() {
+            return Math.floor(Math.random() * 100);
+          },
+          randomColor: function() {
+            let color = [
+              "Azul",
+              "Vermelho",
+              "Preto",
+              "Branco",
+              "Amarelo",
+              "Verde",
+              "Roxo",
+              "Cinza"
+            ];
+            return color[Math.floor(Math.random() * 8)];
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

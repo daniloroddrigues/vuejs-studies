@@ -1,0 +1,45 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Detectando Mudanças em Objetos</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <p>{{ a }}</p>
+      <p>{{ userProfile.age }}</p>
+      <p>{{ userProfile.favoriteColor }}</p>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Detectando Mudanças em Objetos",
+          a: 1,
+          userProfile: {
+            name: "Damty LOL"
+          }
+        }
+      });
+      // Não reativo, não acontece a reatividade em
+      // variáveis adicionadas em nivel de raiz
+      // depois de ter criado a instancia vue.
+      console.log((app.b = 2));
+
+      // Adicionando a nivel raiz
+      Vue.set(app.userProfile, 'age', 30);
+
+      // Atalho de para Vue.set (global);
+      app.$set(app.userProfile, 'age', 25);
+
+    </script>
+  </body>
+</html>

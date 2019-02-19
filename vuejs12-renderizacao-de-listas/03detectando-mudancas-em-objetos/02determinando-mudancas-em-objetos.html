@@ -1,0 +1,67 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Detectando Mudanças em Objetos</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <table>
+        <tr v-bind:style="styleHead">
+          <th>First Name</th>
+          <th>Last Name</th>
+          <th>Age</th>
+          <th>Favorite Color</th>
+        </tr>
+        <tr v-bind:style="styleBody">
+          <th>{{ userProfile.firstName }}</th>
+          <th>{{ userProfile.lastName }}</th>
+          <th>{{ userProfile.age }}</th>
+          <th>{{ userProfile.favoriteColor }}</th>
+        </tr>
+      </table>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Detectando Mudanças em Objetos 2",
+          userProfile: {
+            firstName: "Tio",
+            lastName: "Bill"
+          },
+          styleHead: {
+            textAlign: "left",
+            fontSize: "14px",
+            fontWeight: "bold"
+          },
+          styleBody: {
+            textAlign: "left",
+            fontSize: "12px",
+            fontWeight: "ligth"
+          }
+        }
+      });
+
+      // Adicionando propriedades a objetos existentes
+      // Não reatividade dessa forma
+      Object.assign(app.userProfile, { age: 30, favoriteColor: "Verde Vue" });
+
+      // Adicionar propriedades ao objeto existente
+      // de forma reativa
+      app.userProfile = Object.assign({}, app.userProfile, {
+        age: 72,
+        favoriteColor: "Azul Vue",
+      });
+
+    </script>
+  </body>
+</html>

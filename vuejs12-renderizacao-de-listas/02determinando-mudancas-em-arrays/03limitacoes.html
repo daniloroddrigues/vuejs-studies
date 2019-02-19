@@ -1,0 +1,58 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Renderização de Listas - Limitações</title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <ul>
+        <li v-for="item in items">
+          {{ item }}
+        </li>
+      </ul>
+    </div>
+
+    <div id="app2">
+      <ul>
+        <li v-for="(item, key) in items">
+          {{ item[key] }}
+        </li>
+      </ul>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Limitações",
+          items: ["a", "b", "c", "d"]
+        }
+      });
+
+      console.log("Não reativo");
+      console.log((app.items[1] = "x"));
+      console.log(app.items.length);
+
+      var vm = new Vue({
+        el: "#app2",
+        data: {
+          title: "Limitações",
+          items: ["e", "f", "g", "h"]
+        }
+      });
+
+      // vm.$set(vm.items, 1, "x");
+      let ar = vm.items.splice(1);
+      vm.$set(vm.items, 0, ar);
+
+    </script>
+  </body>
+</html>
