@@ -1,0 +1,45 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Manipulação de Eventos - Chamada Direta de Métodos
+    </title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <button v-on:click="say('hi')">clique</button>
+      <button v-on:click="say('man')">clique</button>
+      <button v-on:click="say('hey')">clique</button>
+      <button v-on:click="say('dude')">clique</button>
+      <button v-on:click="warn('Dont', $event)">passando evento</button>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Métodos em Manipuladores",
+          name: "Vue.js"
+        },
+        methods: {
+          say: function(value) {
+            console.log(value);
+          },
+          warn: function(message, event) {
+            if (event) event.preventDefault();
+            console.log(message);
+            console.log(event);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>
