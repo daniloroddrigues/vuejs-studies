@@ -1,0 +1,85 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Interligações em Formulários - Vinculando aos Valores
+    </title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <p>
+        <!-- `picked` é uma String "a" quando assinalado -->
+        <input type="radio" v-model="picked" value="a" />
+        picked: {{ picked }}
+      </p>
+
+      <p>
+        <!-- `toggle` é verdadeiro ou falso -->
+        <input type="checkbox" v-model="toggle" />
+        {{ toggle }}
+      </p>
+
+      <!-- `selected` é uma String "abc" se a primeira opção está selecionada -->
+      <select v-model="selected">
+        <option value="abc">ABC</option>
+      </select>
+
+      <p>
+        <input
+          type="checkbox"
+          v-model="toggleValue"
+          true-value="sim"
+          false-value="não"
+        />
+        {{ toggleData }}
+      </p>
+
+      <p>
+        <input type="radio" v-model="pick" v-bind:value="a" />
+        {{ pick }}
+      </p>
+
+      <p>
+        <select v-model="selectedVV">
+          <!-- Objeto literal atribuído para demonstração -->
+          <option v-bind:value="{ number: 123 }">123</option>
+        </select>
+      </p>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Vinculando aos Valores",
+          picked: "a",
+          pick: "a",
+          toggle: true,
+          toggleData: "sim",
+          selected: "abc",
+          selectedVV: { number: 123 }
+        },
+        methods: {
+          toggleValue: function() {
+            if (this.toggle === true) {
+              this.toggleData = "sim";
+            } else {
+              this.toggleData = "não";
+            }
+          },
+          a: function() {
+            console.log(this.pick === this.a);
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

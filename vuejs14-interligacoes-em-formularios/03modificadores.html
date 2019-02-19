@@ -1,0 +1,43 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Interligações em Formulários - Modificadores
+    </title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+
+      <p>
+        <!-- sincronizado depois do "change" ao invés de "input" -->
+        <input v-model.lazy="msg" />
+      </p>
+      <p>
+        <input v-model.number="age" id="number" type="number" />
+      </p>
+      <p>
+        <input v-model.trim="trimm" />
+      </p>
+    </div>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Modificadores",
+          msg: "Lazy",
+          age: 10,
+          trimm: "",
+        }
+      });
+    </script>
+  </body>
+</html>

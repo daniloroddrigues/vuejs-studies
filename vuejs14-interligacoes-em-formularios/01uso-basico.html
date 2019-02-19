@@ -1,0 +1,92 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Interligações em Formulários - Uso Básico
+    </title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+
+      <input v-model="message" placeholder="Me edite" />
+      <p>A mensagem é: {{ message }}</p>
+
+      <p>Mensagem com múltiplas linhas:</p>
+      <p style="white-space: pre-line;">{{ textarea }}</p>
+      <br />
+      <textarea v-model="textarea" placeholder="Escreva bastante"></textarea>
+
+      <br />
+
+      <input type="checkbox" id="checkbox" v-model="checked" />
+      <label for="checkbox">{{ checked }}</label>
+
+      <br />
+
+      <input type="radio" id="one" value="Um" v-model="picked" />
+      <label for="one">Um</label>
+      <br />
+      <input type="radio" id="two" value="Dois" v-model="picked" />
+      <label for="two">Dois</label>
+      <br />
+      <span>Escolhido: {{ picked }}</span>
+
+      <br />
+      <select v-model="selected">
+        <option disabled value="">Escolha um item</option>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <br />
+      <span>Selecionado: {{ selected }}</span>
+
+      <br />
+      <select v-model="selectedMultiple" multiple>
+        <option>A</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+      <br />
+      <span>Selecionados: {{ selectedMultiple }}</span>
+    </div>
+
+    <br />
+    <select v-model="selectedVfor">
+      <option v-for="option in options" v-bind:value="option.value">
+        {{ option }}
+      </option>
+    </select>
+    <br />
+    <span>Selecionado: {{ selectedVfor }}</span>
+
+    <script>
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Uso Básico",
+          message: "",
+          textarea: "",
+          checked: true,
+          picked: "",
+          selected: "",
+          selectedMultiple: [],
+          selectedVfor: "A",
+          options: [
+            { text: "Um", value: "A" },
+            { text: "Dois", value: "B" },
+            { text: "Três", value: "C" }
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>
