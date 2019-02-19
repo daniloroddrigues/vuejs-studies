@@ -1,0 +1,70 @@
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>
+    Básico sobre Sobre Componentes - Enviando Mensagens ao Pai com Eventos
+  </title>
+
+  <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+  <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1>#{{ title }}</h1>
+
+    <div :style="{ fontSize: postFontSize + 'em'}">
+      <blog-post v-for="post in posts" :key="post.id" :post="post" v-on:enlarge-text="postFontSize += 0.1" />
+    </div>
+  </div>
+
+  <script>
+
+    Vue.component('blog-post', {
+      props: ['post'],
+      data: function () {
+        return {
+          styleObject: {
+            padding: '6px 8px',
+            marginBottom: '6px',
+          },
+          bgBlogPost: '#ededed',
+        }
+      },
+      methods: {
+        backgroundRandom: function () {
+          // console.log('#' + Math.floor(Math.random() * 16777215).toString(16));
+          this.bgBlogPost = '#' + Math.floor(Math.random() * 16777215).toString(16);
+        }
+      },
+      template: `
+          <div :style="[styleObject, { backgroundColor: bgBlogPost} ]" class="post">
+            <h2 class="post-title">{{ post.title }}</h2>
+            <div v-html="post.content"></div>
+            <button v-on:click="$emit('enlarge-text')">Aumentar font</button>
+            <button v-on:click="backgroundRandom">Random color</button>
+          </div>
+        `
+    })
+
+    var app = new Vue({
+      el: "#app",
+      data: {
+        title: "Enviando Mensagens ao Pai com Eventos",
+        posts: [
+          { id: 0, title: "JavaScript é Melhor", content: "<p>Olá JavaScript</p>" },
+          { id: 1, title: "Python é Melhor", content: "<p>Olá Python</p>" },
+          { id: 2, title: "Ruby é Melhor", content: "<p>Olá Ruby</p>" },
+          { id: 3, title: "Vujs é Melhor", content: "<p>Olá Vuejs</p>" },
+        ],
+        postFontSize: 1,
+      }
+    });
+  </script>
+</body>
+
+</html>

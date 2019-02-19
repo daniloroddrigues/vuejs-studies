@@ -1,0 +1,45 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Básico sobre Sobre Componentes - Reutilizando Componentes
+    </title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <button-counter title="Componentes passando props"></button-counter>
+      <button-counter title="Contador com props"></button-counter>
+      <button-counter title="Outro contador com props"></button-counter>
+    </div>
+
+    <script>
+      Vue.component("button-counter", {
+        props: {
+          title: String
+        },
+        data: function() {
+          return {
+            counter: 0
+          };
+        },
+        template:
+          "<button v-on:click='counter += 1'>{{ title }} = {{ counter }}</button>"
+      });
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Reutilizando Componentes"
+        }
+      });
+    </script>
+  </body>
+</html>

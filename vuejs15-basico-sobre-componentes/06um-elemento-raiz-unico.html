@@ -1,0 +1,90 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Básico sobre Sobre Componentes - Um Elemento Raiz Unico
+    </title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+
+      <!-- Passando apenas um Prop -->
+      <blog-post-object
+        v-for="post in posts"
+        :key="post.id"
+        :post="post"
+      ></blog-post-object>
+
+    </div>
+
+    <script>
+      Vue.component("blog-post-object", {
+        props: ["post"],
+        data: function() {
+          return {
+            styleLink: {
+              display: "block"
+            },
+            stylePost: {
+              padding: "10px 15px",
+              backgroundColor: "#fdfdfd",
+              border: "1px solid #fcfcfc",
+              color: "#444",
+              borderRadius: ".375em",
+              marginBottom: "10px"
+            }
+          };
+        },
+        template: `
+          <div :style="stylePost" class="post">
+            <h3 :style="styleLink" :href="post.url">{{ post.title }}</h3>
+            <span class="published-at">{{ post.published_at }}</span>
+            <div v-html="post.content"></div>
+            <div class="comments">{{ post.comments }}</div>
+          </div>
+        `
+      });
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Um Elemento Raiz Unico",
+          posts: [
+            {
+              id: 0,
+              title: "Minha jornada com Vue",
+              url: "http://google.com/",
+              content: "Hey I'm using Vuejs",
+              published_at: "2015-01-10",
+              comments: "Very nice post"
+            },
+            {
+              id: 1,
+              title: "Postagens com Vue",
+              url: "http://google.com/",
+              content: "Hey I'm using Vuejs",
+              published_at: "2015-01-10",
+              comments: "Very nice post"
+            },
+            {
+              id: 2,
+              title: "Porque Vue é tão divertido",
+              url: "http://google.com/",
+              content: "Hey I'm using Vuejs",
+              published_at: "2015-01-10",
+              comments: "Very nice post"
+            }
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>

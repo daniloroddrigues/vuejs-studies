@@ -1,0 +1,79 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Básico sobre Sobre Componentes - Passando Dados aos Filhos com Props
+    </title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <blog-post title="Minha jornada com Vue"></blog-post>
+      <blog-post title="Postagens com Vue"></blog-post>
+      <blog-post title="Porque Vue é tão divertido"></blog-post>
+
+      <ul>
+        <list-link
+          v-for="post in posts"
+          v-bind:key="post.id"
+          v-bind:title="post.title"
+          :href="post.url"
+        ></list-link>
+      </ul>
+    </div>
+
+    <script>
+      Vue.component("blog-post", {
+        props: ["title"],
+        template: "<h3>{{ title }}</h3>"
+      });
+
+      Vue.component("list-link", {
+        props: ["title", "url"],
+        data: function() {
+          return {
+            styleLink: {
+              display: 'block',
+              padding: '10px 15px',
+              backgroundColor: '#fdfdfd',
+              border: '1px solid #fcfcfc',
+              color: "#444",
+              borderRadius: '.375em',
+              marginBottom: '10px',
+            }
+          }
+        },
+        template: `
+          <a :style="styleLink" :href="url">{{ title }}</a>
+        `
+      });
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Passando Dados aos Filhos com Props",
+          posts: [
+            {
+              id: 0,
+              title: "Minha jornada com Vue",
+              url: "http://google.com/"
+            },
+            { id: 1, title: "Postagens com Vue", url: "http://google.com/" },
+            {
+              id: 2,
+              title: "Porque Vue é tão divertido",
+              url: "http://google.com/"
+            }
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>
