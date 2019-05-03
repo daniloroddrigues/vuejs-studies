@@ -1,0 +1,82 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Básico sobre Sobre Componentes - Enviando Mensagens ao Pai com Eventos
+    </title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <div :style="{ fontSize: postFontSize + 'em' }">
+        <blog-post
+          v-for="post in posts"
+          v-bind:key="post.id"
+          :post="post"
+          v-on:enlarger-text="postFontSize += $event"
+          v-on:enlarger-text="onEnlargerText"
+        ></blog-post>
+      </div>
+    </div>
+
+    <script>
+      Vue.component("blog-post", {
+        props: ["post"],
+        data: function() {
+          return {
+            styleObject: {
+              padding: "6px 8px",
+              marginBottom: "10px",
+              border: "1px solid #ededed"
+            },
+            fontSizePost: 0.1
+          };
+        },
+        template: `
+          <div :style="[ styleObject ]">
+            <h2>{{ post.title }}</h2>
+            <div v-html="post.description"></div>
+            <button v-on:click="$emit('enlarger-text', 0.1)">Aumentar font</button>
+          </div>
+        `
+      });
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Emitindo um Valor com um Evento",
+          postFontSize: 1,
+          posts: [
+            {
+              id: 0,
+              title: "Python is 42",
+              description: "Python is very fast language"
+            },
+            {
+              id: 1,
+              title: "Go is 42",
+              description: "Go is very fast language"
+            },
+            {
+              id: 2,
+              title: "JavaScript is 42",
+              description: "JavaScript is very fast language"
+            }
+          ]
+        },
+        methods: {
+          onEnlargerText: function(val) {
+            this.postFontSize += val;
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

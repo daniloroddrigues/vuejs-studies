@@ -1,0 +1,64 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Básico sobre Sobre Componentes - Enviando Mensagens ao Pai com Eventos
+    </title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+      <base-checkbox v-for="type in types" v-bind:key="type.id" :type="type" />
+      <br />
+    </div>
+
+    <script>
+      Vue.component("base-checkbox", {
+        model: {
+          prop: "checked",
+          event: "change"
+        },
+        props: {
+          checked: Boolean,
+          type: Object
+        },
+        data: function() {
+          return {
+            styleObject: {
+              display: "inline-block",
+              padding: "2px"
+            }
+          };
+        },
+        template: `
+        <div :style="{ styleObject }">
+          <label for="">{{ type.title }}</label>
+          <input
+          type="checkbox"
+          v-bind:checked="checked"
+          v-on:click="$emit('change', $event.target.checked)"
+          />
+        </div>
+        `
+      });
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Usando v-model",
+          types: [
+            { id: 0, title: "Python" },
+            { id: 1, title: "Go" },
+            { id: 2, title: "JavaScript" }
+          ]
+        }
+      });
+    </script>
+  </body>
+</html>

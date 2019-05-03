@@ -1,0 +1,62 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>
+      Básico sobre Sobre Componentes - Enviando Mensagens ao Pai com Eventos
+    </title>
+
+    <!-- versão de desenvolvimento, inclui aviso úteis no console  -->
+    <!-- https://superdevresources.com/vuejs-admin-templates/ -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+
+  <body>
+    <div id="app">
+      <h1>#{{ title }}</h1>
+
+      <custom-input-event
+        v-bind:value="searchText"
+        v-on:input="searchText = $event"
+      ></custom-input-event>
+
+      <br />
+
+      <custom-input v-model="searchText"></custom-input>
+
+      <br />
+      {{ searchText }}
+    </div>
+
+    <script>
+      Vue.component("custom-input", {
+        props: ["value"],
+        template: `
+          <input
+           v-bind:value="value"
+           v-on:input="$emit('input', $event.target.value)"
+           />
+        `
+      });
+
+      Vue.component("custom-input-event", {
+        props: ["value"],
+        template: `
+            <input
+                v-bind:value="value"
+                v-on:input="$emit('input', $event.target.value)"
+                />
+        `
+      });
+
+      var app = new Vue({
+        el: "#app",
+        data: {
+          title: "Usando v-model",
+          searchText: "search here",
+        }
+      });
+    </script>
+  </body>
+</html>
